@@ -32,6 +32,27 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="StoreAppButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="Background" Value="AliceBlue"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="2">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Width" Value="85"/>
+                    <Setter Property="Height" Value="85"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="RemoveButtonStyle" TargetType= "{x:Type Button}">
             <Setter Property="Width" Value="80"/>
             <Setter Property="Height" Value="80"/>
@@ -293,10 +314,17 @@
                 </StackPanel>
                 <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="Please select an app to remove" FontFamily="Arial" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Height="28" Width="234"></Label>
                 <Image Source="res\bloatfish.png" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" Margin="27,120,23,26" Grid.RowSpan="2"></Image>
-                <TextBlock Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Arial" FontSize="16">
-                    <Hyperlink NavigateUri="https://www.microsoft.com/en-us/store/apps/windows?icid=CNavAppsWindowsApps" RequestNavigate="Hyperlink_RequestNavigate">Click here to navigate to the App Store</Hyperlink>
-
-                </TextBlock>
+                <StackPanel Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Margin="79,0">
+                    <Button Name="storeLaunchBtn" Margin="0" FontSize="14" Style="{StaticResource StoreAppButtonStyle}" Click="storeLaunchBtn_Click">
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" Opacity="0.8"/>
+                        </Button.BitmapEffect>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <Image Source="res\storeicon80x80.png"></Image>
+                        </Border>
+                    </Button>
+                    <Label Content="App Store" FontSize="14" FontWeight="SemiBold" Padding="0" HorizontalAlignment="Center"></Label>
+                </StackPanel>
                 <Label Content="BloatFish" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontFamily="Arial" FontSize="18">
                     <Label.Effect>
                         <DropShadowEffect
@@ -313,5 +341,3 @@
 </Window>
                     
               
-
-                   
