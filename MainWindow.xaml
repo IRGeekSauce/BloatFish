@@ -1,0 +1,317 @@
+﻿<Window x:Class="BloatFish.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:toolkit="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        xmlns:local="clr-namespace:BloatFish"
+        mc:Ignorable="d"
+        Title="BloatFish - Win 10 App Remover" Background="Honeydew" Height="750" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style x:Key="ImageButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Transparent">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Width" Value="85"/>
+                    <Setter Property="Height" Value="85"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Width" Value="80"/>
+                    <Setter Property="Height" Value="80"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="RemoveButtonStyle" TargetType= "{x:Type Button}">
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="Background" Value="#be2b2b"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="2">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Width" Value="85"/>
+                    <Setter Property="Height" Value="85"/>
+                    <Setter Property="Background" Value="#ea3333"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <toolkit:BusyIndicator x:Name="_busyIndicator" IsBusy="False" BusyContent="Removing Selected App...">
+        <Border BorderBrush="Black" BorderThickness="2">
+            <Grid x:Name="mainGrid" Margin="0, 10, 0, 0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="130*"></RowDefinition>
+                    <RowDefinition Height="130*"></RowDefinition>
+                    <RowDefinition Height="130*"></RowDefinition>
+                    <RowDefinition Height="130*"></RowDefinition>
+                    <RowDefinition Height="94*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0">
+                    <Button Name="bingweatherBtn" Margin="10" Style="{StaticResource ImageButtonStyle}" Click="ImageBtn_Click">
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" Opacity="0.8"/>
+                        </Button.BitmapEffect>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <Image Source="res\weather_icon80x80.jpg"></Image>
+                        </Border>
+                    </Button>
+                    <Label Content="Bing Weather" FontSize="14" FontWeight="SemiBold" Padding="0" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1">
+                    <Button Name="bingnewsBtn" Margin="10" Style="{StaticResource ImageButtonStyle}" Click="ImageBtn_Click">
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" Opacity="0.8"/>
+                        </Button.BitmapEffect>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <Image Source="res\news_icon80x80.png"></Image>
+                        </Border>
+                    </Button>
+                    <Label Content="News" FontSize="14" FontWeight="SemiBold" Padding="0" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="2">
+                    <Button Name="onenoteBtn" Margin="10" Style="{StaticResource ImageButtonStyle}" Click="ImageBtn_Click">
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" Opacity="0.8"/>
+                        </Button.BitmapEffect>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <Image Source="res\onenote_icon80x80.png"></Image>
+                        </Border>
+                    </Button>
+                    <Label Content="One Note" FontSize="14" FontWeight="SemiBold" Padding="0" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="3">
+                    <Button Name="windowsalarmsBtn" Margin="10" Style="{StaticResource ImageButtonStyle}" Click="ImageBtn_Click">
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" Opacity="0.8"/>
+                        </Button.BitmapEffect>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <Image Source="res\alarm_icon80x80.png"></Image>
+                        </Border>
+                    </Button>
+                    <Label Content="Alarms &amp; Clock" FontSize="14" FontWeight="SemiBold" Padding="0" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="4">
+                    <Button Name="voicerecorderBtn" Margin="10" Style="{StaticResource ImageButtonStyle}" Click="ImageBtn_Click">
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" Opacity="0.8"/>
+                        </Button.BitmapEffect>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <Image Source="res\voicerecorder_icon80x80.png"></Image>
+                        </Border>
+                    </Button>
+                    <Label Content="Voice Recorder" FontSize="14" FontWeight="SemiBold" Padding="0" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="0">
+                    <Button Name="windowsmapsBtn" Margin="10" Style="{StaticResource ImageButtonStyle}" Click="ImageBtn_Click">
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" Opacity="0.8"/>
+                        </Button.BitmapEffect>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <Image Source="res\maps_icon80x80.png"></Image>
+                        </Border>
+                    </Button>
+                    <Label Content="Maps" FontSize="14" FontWeight="SemiBold" Padding="0" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="1">
+                    <Button Name="windowscameraBtn" Margin="10" Style="{StaticResource ImageButtonStyle}" Click="ImageBtn_Click">
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" Opacity="0.8"/>
+                        </Button.BitmapEffect>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <Image Source="res\camera_icon80x80.png"></Image>
+                        </Border>
+                    </Button>
+                    <Label Content="Camera" FontSize="14" FontWeight="SemiBold" Padding="0" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="2">
+                    <Button Name="peopleBtn" Margin="10" Style="{StaticResource ImageButtonStyle}" Click="ImageBtn_Click">
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" Opacity="0.8"/>
+                        </Button.BitmapEffect>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <Image Source="res\people_icon80x80.png"></Image>
+                        </Border>
+                    </Button>
+                    <Label Content="People" FontSize="14" FontWeight="SemiBold" Padding="0" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="3">
+                    <Button Name="xboxappBtn" Margin="10" Style="{StaticResource ImageButtonStyle}" Click="ImageBtn_Click">
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" Opacity="0.8"/>
+                        </Button.BitmapEffect>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <Image Source="res\xbox_icon80x80.png"></Image>
+                        </Border>
+                    </Button>
+                    <Label Content="XBox" FontSize="14" FontWeight="SemiBold" Padding="0" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="4">
+                    <Button Name="zunemusicBtn" Margin="10" Style="{StaticResource ImageButtonStyle}" Click="ImageBtn_Click">
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" Opacity="0.8"/>
+                        </Button.BitmapEffect>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <Image Source="res\groove_icon80x80.png"></Image>
+                        </Border>
+                    </Button>
+                    <Label Content="Zune Music" FontSize="14" FontWeight="SemiBold" Padding="0" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Grid.Column="0">
+                    <Button Name="messagingBtn" Margin="10" Style="{StaticResource ImageButtonStyle}" Click="ImageBtn_Click">
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" Opacity="0.8"/>
+                        </Button.BitmapEffect>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <Image Source="res\messaging_icon80x80.png"></Image>
+                        </Border>
+                    </Button>
+                    <Label Content="Messaging" FontSize="14" FontWeight="SemiBold" Padding="0" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Grid.Column="1">
+                    <Button Name="builderBtn" Margin="10" Style="{StaticResource ImageButtonStyle}" Click="ImageBtn_Click">
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" Opacity="0.8"/>
+                        </Button.BitmapEffect>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <Image Source="res\3dbuilder_icon80x80.png"></Image>
+                        </Border>
+                    </Button>
+                    <Label Content="3D Builder" FontSize="14" FontWeight="SemiBold" Padding="0" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Grid.Column="2">
+                    <Button Name="bubblewitchBtn" Margin="10" Style="{StaticResource ImageButtonStyle}" Click="ImageBtn_Click">
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" Opacity="0.8"/>
+                        </Button.BitmapEffect>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <Image Source="res\bubblewitch_icon80x80.png"></Image>
+                        </Border>
+                    </Button>
+                    <Label Content="Bubble Witch 3 Saga" FontSize="14" FontWeight="SemiBold" Padding="0" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Grid.Column="3">
+                    <Button Name="minecraftBtn" Margin="10" Style="{StaticResource ImageButtonStyle}" Click="ImageBtn_Click">
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" Opacity="0.8"/>
+                        </Button.BitmapEffect>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <Image Source="res\minecraft_icon80x80.png"></Image>
+                        </Border>
+                    </Button>
+                    <Label Content="Minecraft" FontSize="14" FontWeight="SemiBold" Padding="0" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Grid.Column="4">
+                    <Button Name="spotifyBtn" Margin="10" Style="{StaticResource ImageButtonStyle}" Click="ImageBtn_Click">
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" Opacity="0.8"/>
+                        </Button.BitmapEffect>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <Image Source="res\spotify_icon80x80.png"></Image>
+                        </Border>
+                    </Button>
+                    <Label Content="Spotify" FontSize="14" FontWeight="SemiBold" Padding="0" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Grid.Column="0">
+                    <Button Name="empiresBtn" Margin="10" Style="{StaticResource ImageButtonStyle}" Click="ImageBtn_Click">
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" Opacity="0.8"/>
+                        </Button.BitmapEffect>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <Image Source="res\empires_icon80x80.png"></Image>
+                        </Border>
+                    </Button>
+                    <Label Content="March of Empires" FontSize="14" FontWeight="SemiBold" Padding="0" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Grid.Column="1">
+                    <Button Name="solitairecollectionBtn" Margin="10" Style="{StaticResource ImageButtonStyle}" Click="ImageBtn_Click">
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" Opacity="0.8"/>
+                        </Button.BitmapEffect>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <Image Source="res\solitaire_icon80x80.png"></Image>
+                        </Border>
+                    </Button>
+                    <Label Content="Solitaire" FontSize="14" FontWeight="SemiBold" Padding="0" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Grid.Column="2">
+                    <Button Name="stickynotesBtn" Margin="10" Style="{StaticResource ImageButtonStyle}" Click="ImageBtn_Click">
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" Opacity="0.8"/>
+                        </Button.BitmapEffect>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <Image Source="res\stickynotes_icon80x80.png"></Image>
+                        </Border>
+                    </Button>
+                    <Label Content="Sticky Notes" FontSize="14" FontWeight="SemiBold" Padding="0" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Grid.Column="3">
+                    <Button Name="skypeappBtn" Margin="10" Style="{StaticResource ImageButtonStyle}" Click="ImageBtn_Click">
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" Opacity="0.8"/>
+                        </Button.BitmapEffect>
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <Image Source="res\skype_icon80x80.png"></Image>
+                        </Border>
+                    </Button>
+                    <Label Content="Skype" FontSize="14" FontWeight="SemiBold" Padding="0" HorizontalAlignment="Center"></Label>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Grid.Column="4">
+                    <Button Name="removeAllBtn" Margin="10" FontSize="14" Style="{StaticResource RemoveButtonStyle}" Content="Remove All" Click="RemoveAllBtn_Click_1" BorderBrush="Black" BorderThickness="2">
+                        <Button.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" Opacity="0.8"/>
+                        </Button.BitmapEffect>
+                    </Button>
+
+                </StackPanel>
+                <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="Please select an app to remove" FontFamily="Arial" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Height="28" Width="234"></Label>
+                <Image Source="res\bloatfish.png" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" Margin="27,120,23,26" Grid.RowSpan="2"></Image>
+                <TextBlock Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Arial" FontSize="16">
+                    <Hyperlink NavigateUri="https://www.microsoft.com/en-us/store/apps/windows?icid=CNavAppsWindowsApps" RequestNavigate="Hyperlink_RequestNavigate">Click here to navigate to the App Store</Hyperlink>
+
+                </TextBlock>
+                <Label Content="BloatFish" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontFamily="Arial" FontSize="18">
+                    <Label.Effect>
+                        <DropShadowEffect
+                            ShadowDepth="4"
+                            Direction="320"
+                            Color="Black"
+                            Opacity="0.7"
+                            BlurRadius="4"/>
+                    </Label.Effect>
+                </Label>
+            </Grid>
+        </Border>
+    </toolkit:BusyIndicator>
+</Window>
+                    
+              
+
+                   
